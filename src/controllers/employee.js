@@ -13,7 +13,8 @@ exports.createEmployee = async (req, res) => {
     try {
         const employee = new Employee(req.body);
         await employee.save();
-        res.status(200).json(employee);
+        res.status(200).json({msg: `Empleado ${employee.name} agregado con exito` })
+        //res.status(200).json(employee);
     } catch (error) {
         res.status(500).json({ msg: 'Error al crear el empleado' });
     }
@@ -29,7 +30,8 @@ exports.updateEmployee = async (req, res) => {
         employee.phone =phone;
         employee.email=email;
         employee = await Employee.findOneAndUpdate({ _id: req.params.id }, employee, { new: true });
-        res.status(200).json(employee);
+        res.status(200).json({msg: `Empleado ${employee.name} actualizado con exito` })
+        //res.status(200).json(employee);
     } catch (error) {
         res.status(500).json({ msg: 'Error al actualizar el empleado' });
     }

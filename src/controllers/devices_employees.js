@@ -28,7 +28,8 @@ exports.createDevices_Employees = async (req, res) => {
     try {
         const devices_employees = new Devices_Employees(req.body);
         await devices_employees.save();
-        res.status(200).json(devices_employees);
+        res.status(200).json({msg: `Asignación del dispositivo creada con exito` })
+        //res.status(200).json(devices_employees);
     } catch (error) {
         res.status(500).json({ msg: 'Error al crear la asignación del dispositivo' });
     }
@@ -42,7 +43,8 @@ exports.updateDevices_Employees = async (req, res) => {
         devices_employees.id_device = id_device;
         devices_employees.observation = observation;
         devices_employees = await Devices_Employees.findOneAndUpdate({ _id: req.params.id }, devices_employees, { new: true });
-        res.status(200).json(devices_employees);
+        res.status(200).json({msg: `Asignación del dispositivo actualizada con exito` })
+        //res.status(200).json(devices_employees);
     } catch (error) {
         res.status(500).json({ msg: 'Error al actualizar la asignación del dispositivo' });
     }

@@ -13,7 +13,8 @@ exports.createDevice = async (req, res) => {
     try {
         const device = new Device(req.body);
         await device.save();
-        res.status(200).json(device);
+        res.status(200).json({msg: `Dispostitivo ${device.name} agregado con exito` })
+        //res.status(200).json(device);
     } catch (error) {
         res.status(500).json({ msg: 'Error al crear el dispositivo' });
     }
@@ -30,7 +31,8 @@ exports.updateDevice = async (req, res) => {
         device.description = description;
         device.status = status;
         device = await Device.findOneAndUpdate({ _id: req.params.id }, device, { new: true }).populate(['id_brand', 'id_reference']);
-        res.status(200).json(device);
+        res.status(200).json({msg: `Dispositivo ${device.name} actualizado con exito` })
+        //res.status(200).json(device);
     } catch (error) {
         res.status(500).json({ msg: 'Error al actualizar el equipo' });
     }
