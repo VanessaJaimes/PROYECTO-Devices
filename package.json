@@ -1,29 +1,18 @@
 {
   "name": "proyecto-devices",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VanessaJaimes/PROYECTO-Devices.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/VanessaJaimes/PROYECTO-Devices/issues"
-  },
-  "homepage": "https://github.com/VanessaJaimes/PROYECTO-Devices#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "mongoose": "^7.0.1"
+    "vue": "^3.2.47"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vite": "^4.2.0"
   }
 }
