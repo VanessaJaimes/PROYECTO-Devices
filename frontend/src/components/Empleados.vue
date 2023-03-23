@@ -1,6 +1,6 @@
 <template>
     <header class="w-100 bg-white py-4">
-        <h1>MARCAS</h1>
+        <h1>EMPLEADOS</h1>
         <ul class="nav justify-content-center bg-white">
             <li class="nav-item">
                 <a class="nav-link" href="../index.html">Inicio</a>
@@ -8,7 +8,7 @@
         </ul>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Nueva Marca
+        Nueva Empleado
         </button>
 
         <!-- Modal -->
@@ -16,18 +16,26 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nuevo Empleado</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="text">Nombre:</label>
-                            <input type="text" class="form-control" id="email" v-model="name">
+                            <label for="text">Nombres:</label>
+                            <input type="text" class="form-control"  v-model="name">
+                            <label for="text">Apellidos:</label>
+                            <input type="text" class="form-control"  v-model="surname">
+                            <label for="text">Direccion:</label>
+                            <input type="text" class="form-control"  v-model="address">
+                            <label for="text">Telefono:</label>
+                            <input type="text" class="form-control"  v-model="phone">
+                            <label for="text">Email:</label>
+                            <input type="text" class="form-control"  v-model="email">
                           </div>
                     </div> 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="btnAdd" type="button" class="btn btn-primary" @click="postMarcas">Agregar</button>
+                        <button id="btnAdd" type="button" class="btn btn-primary" @click="postEmpleados">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -40,15 +48,23 @@
             <thead>
                 <tr>
                     <th id="first">ID</th>
-                    <th id="first">NOMBRE</th>
+                    <th id="first">NOMBRES</th>
+                    <th id="first">APELLIDOS</th>
+                    <th id="first">DIRECCION</th>
+                    <th id="first">TELEFONO</th>
+                    <th id="first">EMAIL</th>
                     <th id="last">ELIMINAR</th>
                 </tr>
             </thead>
 
             <tbody>
-               <tr v-for="(marca,index) in marcas" :key="index">
-                <td>{{marca._id}}</td>
-                <td>{{marca.name}}</td>
+               <tr v-for="(empleado,index) in empleados" :key="index">
+                <td>{{empleado._id}}</td>
+                <td>{{empleado.name}}</td>
+                <td>{{empleado.surname}}</td>
+                <td>{{empleado.address}}</td>
+                <td>{{empleado.phone}}</td>
+                <td>{{empleado.email}}</td>
                 <td><button @click="deleteMarca(marca._id)">Eliminar</button></td>
                </tr>
             </tbody>
@@ -59,23 +75,23 @@
 import { onMounted, ref } from 'vue';
 import axios from "axios";
 
-const marcas = ref([]);
+const empleados = ref([]);
 const name = ref("")
 
 onMounted(()=>{
-     getMarcas();
-     console.log(marcas.value);
+     getEmpleados();
+     console.log(empleados.value);
 })
 
 
-async function getMarcas() {
-    const res = await fetch("http://localhost:3000/api/v1/brand/all")
+async function getEmpleados() {
+    const res = await fetch("http://localhost:3000/api/v1/employee/all")
     const data = await res.json();
-    marcas.value = data;
+    empleados.value = data;
 }
 
-async function postMarcas() {
-    const res = await axios.post("http://localhost:3000/api/v1/brand/create", {name: name.value})
+async function postEmpleados() {
+    const res = await axios.post("http://localhost:3000/api/v1/employee/create", {name: name.value} )
 }
 
 async function deleteMarca(id) {

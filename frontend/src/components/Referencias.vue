@@ -1,6 +1,6 @@
 <template>
     <header class="w-100 bg-white py-4">
-        <h1>MARCAS</h1>
+        <h1>REFERENCIAS</h1>
         <ul class="nav justify-content-center bg-white">
             <li class="nav-item">
                 <a class="nav-link" href="../index.html">Inicio</a>
@@ -8,7 +8,7 @@
         </ul>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Nueva Marca
+        Nueva REFERENCIA
         </button>
 
         <!-- Modal -->
@@ -16,7 +16,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Referencia</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -27,7 +27,7 @@
                     </div> 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="btnAdd" type="button" class="btn btn-primary" @click="postMarcas">Agregar</button>
+                        <button id="btnAdd" type="button" class="btn btn-primary" @click="postReferencias">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -46,9 +46,9 @@
             </thead>
 
             <tbody>
-               <tr v-for="(marca,index) in marcas" :key="index">
-                <td>{{marca._id}}</td>
-                <td>{{marca.name}}</td>
+               <tr v-for="(referencia,index) in referencias" :key="index">
+                <td>{{referencia._id}}</td>
+                <td>{{referencia.name}}</td>
                 <td><button @click="deleteMarca(marca._id)">Eliminar</button></td>
                </tr>
             </tbody>
@@ -59,23 +59,23 @@
 import { onMounted, ref } from 'vue';
 import axios from "axios";
 
-const marcas = ref([]);
+const referencias = ref([]);
 const name = ref("")
 
 onMounted(()=>{
-     getMarcas();
-     console.log(marcas.value);
+     getReferencias();
+     console.log(referencias.value);
 })
 
 
-async function getMarcas() {
-    const res = await fetch("http://localhost:3000/api/v1/brand/all")
+async function getReferencias() {
+    const res = await fetch("http://localhost:3000/api/v1/device_reference/all")
     const data = await res.json();
-    marcas.value = data;
+    referencias.value = data;
 }
 
-async function postMarcas() {
-    const res = await axios.post("http://localhost:3000/api/v1/brand/create", {name: name.value})
+async function postReferencias() {
+    const res = await axios.post("http://localhost:3000/api/v1/device_reference/create", {name: name.value})
 }
 
 async function deleteMarca(id) {

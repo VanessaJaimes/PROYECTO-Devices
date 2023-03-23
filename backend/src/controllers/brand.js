@@ -10,6 +10,7 @@ exports.allBrand = async (req, res) => {
 }
 //validacion de unica en front
 exports.createBrand = async (req, res) => {
+    console.log(res);
     try {
         const brand = new Brand(req.body);
         await brand.save();

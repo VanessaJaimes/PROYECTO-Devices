@@ -16,21 +16,16 @@
                         
                             </li>
                             <li>
-                                <a href="/pages/referencias.html" class="btn btn-default btn-lg"><span
-                                        class="network-name">Referencias</span></a>
+                                <router-link to="referencias"  class="network-name">Referencias</router-link>
                             </li>
                             <li>
-                                <a href="/pages/empleados.html" class="btn btn-default btn-lg"><span
-                                        class="network-name">Empleados</span></a>
+                                <router-link to="empleados"  class="network-name">Empleados</router-link>
                             </li>
                             <li>
-                                <a href="/pages/equipos.html" class="btn btn-default btn-lg"><span
-                                        class="network-name">Equipos</span></a>
+                                <router-link to="equipos"  class="network-name">Equipos</router-link>
                             </li>
                             <li>
-                                <a href="/pages/asignar.html" class="btn btn-default btn-lg"><span
-                                        class="network-name">Asignar
-                                        Equipos</span></a>
+                                <router-link to="asignar"  class="network-name">Asignar Equipos</router-link>
                             </li>
                         </ul>
                     </div>
@@ -44,5 +39,11 @@
 
 </script>
 <style>
-    
+    .list-inline{
+        padding: auto;
+        margin: 20px;
+    }
+    li{
+        margin: 20px;
+    }
 </style>

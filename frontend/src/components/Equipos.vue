@@ -1,6 +1,6 @@
 <template>
     <header class="w-100 bg-white py-4">
-        <h1>MARCAS</h1>
+        <h1>EQUIPOS</h1>
         <ul class="nav justify-content-center bg-white">
             <li class="nav-item">
                 <a class="nav-link" href="../index.html">Inicio</a>
@@ -8,7 +8,7 @@
         </ul>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Nueva Marca
+        Nuevo Equipo
         </button>
 
         <!-- Modal -->
@@ -16,7 +16,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nuevo Equipo</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -24,7 +24,32 @@
                             <label for="text">Nombre:</label>
                             <input type="text" class="form-control" id="email" v-model="name">
                           </div>
+                          <div class="form-group">
+                            <label for="text">Serial:</label>
+                            <input type="text" class="form-control" id="email" v-model="serial">
+                          </div>
+                          <div class="mb-3">
+                            <label for="disabledSelect" class="form-label" >Id Marca</label>
+                            <select id="disabledSelect" class="form-select" >
+                              <option>Disabled select</option>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">Id Referencia</label>
+                            <select id="disabledSelect" class="form-select">
+                              <option>Disabled select</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="text">Descripcion:</label>
+                            <input type="text" class="form-control" id="email" v-model="name">
+                          </div>
+                          <div class="form-group">
+                            <label for="text">Estado:</label>
+                            <input type="text" class="form-control" id="email" v-model="name">
+                          </div>
                     </div> 
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button id="btnAdd" type="button" class="btn btn-primary" @click="postMarcas">Agregar</button>
@@ -41,14 +66,24 @@
                 <tr>
                     <th id="first">ID</th>
                     <th id="first">NOMBRE</th>
+                    <th id="first">SERIAL</th>
+                    <th id="first">ID MARCA</th>
+                    <th id="first">ID REFERENCIA</th>
+                    <th id="first">DESCRIPCION</th>
+                    <th id="first">ESTADO</th>
                     <th id="last">ELIMINAR</th>
                 </tr>
             </thead>
 
             <tbody>
-               <tr v-for="(marca,index) in marcas" :key="index">
-                <td>{{marca._id}}</td>
-                <td>{{marca.name}}</td>
+               <tr v-for="(equipo,index) in equipos" :key="index">
+                <td>{{equipo._id}}</td>
+                <td>{{equipo.name}}</td>
+                <td>{{equipo.serial}}</td>
+                <td>{{equipo.id_brand?._id}}</td>
+                <td>{{equipo.id_reference?._id}}</td>
+                <td>{{equipo.description}}</td>
+                <td>{{equipo.status}}</td>
                 <td><button @click="deleteMarca(marca._id)">Eliminar</button></td>
                </tr>
             </tbody>
@@ -59,23 +94,23 @@
 import { onMounted, ref } from 'vue';
 import axios from "axios";
 
-const marcas = ref([]);
+const equipos = ref([]);
 const name = ref("")
 
 onMounted(()=>{
-     getMarcas();
-     console.log(marcas.value);
+     getEquipos();
+     console.log(equipos.value);
 })
 
 
-async function getMarcas() {
-    const res = await fetch("http://localhost:3000/api/v1/brand/all")
+async function getEquipos() {
+    const res = await fetch("http://localhost:3000/api/v1/device//all")
     const data = await res.json();
-    marcas.value = data;
+    equipos.value = data;
 }
 
-async function postMarcas() {
-    const res = await axios.post("http://localhost:3000/api/v1/brand/create", {name: name.value})
+async function postEquipos() {
+    const res = await axios.post("http://localhost:3000/api/v1/device/create", {name: name.value}, {serial: serial.value}, {id_brand: id_brand?._id.value}, {id_reference: id_reference?._id.value}, {description: description.value},{status: status.value})
 }
 
 async function deleteMarca(id) {
